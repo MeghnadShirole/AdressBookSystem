@@ -1,12 +1,14 @@
 package com.model;
 
+import com.service.Search;
 import com.service.Sort;
 import com.util.InputUtil;
+
 import java.util.*;
 
 public class Helper {
     // GLOBAL LIST TO STORE PERSON RECORD
-    List<Person> PERSON = new ArrayList<Person>();
+    List<Person> PERSON = new ArrayList<>();
     //	ADD METHOD
     public void addRecord()
     {
@@ -57,7 +59,7 @@ public class Helper {
     //	EDIT METHOD
     public void editRecord()
     {
-        int id,choice = 0, i=0;
+        int id,choice, i=0;
         String fname,lname,address,city,state,phone,zip;
         for(Person person: PERSON)
         {
@@ -123,8 +125,8 @@ public class Helper {
         PERSON.remove(id);
     } //end of delete() method
 
-    public void sortRecords()
-    {
+    //    This Method will Sort the Address book by Name, city, state and Zip
+    public void sortRecords() {
         System.out.println("""
                 Sort By...
                 1: First Name
@@ -133,25 +135,62 @@ public class Helper {
                 4: Zip Code
                 5: Back""");
         int choice = InputUtil.getIntValue();
-        switch (choice)
-        {
+        switch (choice) {
             case 1:
                 Sort.sortByName(PERSON);
                 break;
-            case 2 :
+            case 2:
                 Sort.sortByCity(PERSON);
                 break;
-            case 3 :
+            case 3:
                 Sort.sortByState(PERSON);
                 break;
-            case 4 :
+            case 4:
                 Sort.sortByZip(PERSON);
                 break;
-            case 5 :
+            case 5:
                 return;
             default:
                 System.out.println("Please Enter Valid Option...");
         }
+    } //End of Sort() Method
+
+    //    This Method Will Search Person By City or State
+    public void searchByCityState()
+    {
+        int choice;
+        System.out.println("""
+                Search By
+                1: City
+                2: State""");
+        choice=InputUtil.getIntValue();
+        switch (choice) {
+            case 1 -> Search.searchByCity(PERSON);
+            case 2 -> Search.searchByState(PERSON);
+            default -> System.out.println("Enter Valid Option");
+        }
+    }
+
+    //    Create City Dictionary
+    public Dictionary<String,String> createCityDict()
+    {
+        Dictionary<String,String> cityDict = new Hashtable<>();
+        for (Person person:PERSON)
+        {
+            cityDict.put(person.getFname(),person.getCity());
+        }
+        return cityDict;
+    }
+
+    //    Create State Dictionary
+    public Dictionary<String,String> createStateDict()
+    {
+        Dictionary<String,String> stateDict = new Hashtable<>();
+        for (Person person:PERSON)
+        {
+            stateDict.put(person.getFname(),person.getState());
+        }
+        return stateDict;
     }
 
     //    this function will check for duplicate users
