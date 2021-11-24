@@ -7,7 +7,8 @@ import java.util.Dictionary;
 import java.util.List;
 
 public class Search {
-    public static void searchByCityAndState(Dictionary<String,String> cityDict,Dictionary<String,String> stateDict)
+    public static void searchByCityAndState(Dictionary<String,String> cityDict,
+                                            Dictionary<String,String> stateDict)
     {
         System.out.println("In Progress...");
     }

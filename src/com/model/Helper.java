@@ -171,6 +171,14 @@ public class Helper {
         }
     }
 
+    //  This Method will View Person by City and State
+    public void viewByCityAndState()
+    {
+        Dictionary<String ,String> cityDict = createCityDict();
+        Dictionary<String ,String> stateDict = createStateDict();
+        Search.searchByCityAndState(cityDict,stateDict);
+    } //End of viewByCityAndState() Method
+
     //    Create City Dictionary
     public Dictionary<String,String> createCityDict()
     {
