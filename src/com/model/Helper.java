@@ -5,6 +5,7 @@ import com.service.Sort;
 import com.util.InputUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Helper {
     // GLOBAL LIST TO STORE PERSON RECORD
@@ -178,6 +179,30 @@ public class Helper {
         Dictionary<String ,String> stateDict = createStateDict();
         Search.searchByCityAndState(cityDict,stateDict);
     } //End of viewByCityAndState() Method
+
+    public void countByOption() {
+        System.out.println("1. Count City ");
+        System.out.println("2. Count State");
+        System.out.println("3. Back ");
+        System.out.println("Enter Your Choice : ");
+        int choice = InputUtil.getIntValue();
+        switch (choice) {
+            case 1:
+                Map<String, Long> countCity = PERSON.stream()
+                        .collect(Collectors.groupingBy(Person::getCity, Collectors.counting()));
+                System.out.println(countCity + "\n");
+                break;
+            case 2:
+                Map<String, Long> countState = PERSON.stream()
+                        .collect(Collectors.groupingBy(Person::getState, Collectors.counting()));
+                System.out.println(countState + "\n");
+                break;
+            case 3:
+                return;
+            default:
+                System.out.println("Invalid Option");
+        }
+    }
 
     //    Create City Dictionary
     public Dictionary<String,String> createCityDict()
