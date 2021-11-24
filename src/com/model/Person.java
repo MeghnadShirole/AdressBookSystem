@@ -1,5 +1,7 @@
 package com.model;
 
+import java.util.Comparator;
+
 public class Person {
 
     private String fname, lname, address, city, state, phone,zip;
@@ -84,6 +86,18 @@ public class Person {
     {
         this.zip = zip;
     }
+
+    // Sort By First Name
+    public static Comparator<Person> firstNameSorting = new Comparator<Person>() {
+        @Override
+        public int compare(Person p1, Person p2)
+        {
+            String fname1 = p1.getFname();
+            String fname2 = p2.getFname();
+            // ascending order
+            return fname1.compareTo(fname2);
+        }
+    };
 
     @Override
     public String toString() {

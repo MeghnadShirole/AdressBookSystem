@@ -15,7 +15,8 @@ public class AddressBook {
             System.out.println("2: Display Records     ");
             System.out.println("3: Edit Person     ");
             System.out.println("4: Delete Person     ");
-            System.out.println("5: Exit		       \n");
+            System.out.println("5: Sort     ");
+            System.out.println("6: Exit		       \n");
             System.out.println("--- Enter Your Choice ---");
             choice = InputUtil.getIntValue();
             switch (choice) {
