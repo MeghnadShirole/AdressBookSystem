@@ -24,7 +24,8 @@ public class AddressBook {
                 case 2 -> help.displayRecord();
                 case 3 -> help.editRecord();
                 case 4 -> help.deleteRecord();
-                case 5 -> i = 1;
+                case 5 -> help.sortRecords();
+                case 6 -> i = 1;
                 default -> System.out.println("Please Enter Valid Option!!!");
             }
         }

@@ -125,7 +125,33 @@ public class Helper {
 
     public void sortRecords()
     {
-        Sort.sortByName(PERSON);
+        System.out.println("""
+                Sort By...
+                1: First Name
+                2: City
+                3: State
+                4: Zip Code
+                5: Back""");
+        int choice = InputUtil.getIntValue();
+        switch (choice)
+        {
+            case 1:
+                Sort.sortByName(PERSON);
+                break;
+            case 2 :
+                Sort.sortByCity(PERSON);
+                break;
+            case 3 :
+                Sort.sortByState(PERSON);
+                break;
+            case 4 :
+                Sort.sortByZip(PERSON);
+                break;
+            case 5 :
+                return;
+            default:
+                System.out.println("Please Enter Valid Option...");
+        }
     }
 
     //    this function will check for duplicate users
