@@ -24,7 +24,6 @@ public class Search {
         {
             if(p.getCity().equalsIgnoreCase(search))
             {
-
                 flag = 1;
                 matches.add(p);
             }

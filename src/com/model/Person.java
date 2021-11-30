@@ -2,8 +2,8 @@ package com.model;
 
 import java.util.Comparator;
 
-public class Person {
-
+public class Person
+{
     private String fname, lname, address, city, state, phone,zip;
 
     public Person(String fname, String lname, String address, String city, String state, String phone, String zip)
@@ -15,6 +15,10 @@ public class Person {
         this.state = state;
         this.phone = phone;
         this.zip = zip;
+    }
+
+    public Person() {
+
     }
 
     public String getFname()
@@ -87,7 +91,6 @@ public class Person {
         this.zip = zip;
     }
 
-
     // Sort By First Name
     public static Comparator<Person> firstNameSorting = (p1, p2) -> {
         String fname1 = p1.getFname();
@@ -116,7 +119,6 @@ public class Person {
         // ascending order
         return zip1.compareToIgnoreCase(zip2);
     };
-
 
     @Override
     public String toString() {

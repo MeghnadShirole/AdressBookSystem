@@ -1,15 +1,14 @@
 package com.model;
-
 import com.service.Search;
 import com.service.Sort;
 import com.util.InputUtil;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 public class Helper {
     // GLOBAL LIST TO STORE PERSON RECORD
-    List<Person> PERSON = new ArrayList<>();
+    List<Person> personList = new ArrayList<>();
     //	ADD METHOD
     public void addRecord()
     {
@@ -39,22 +38,21 @@ public class Helper {
         System.out.print("Enter state : ");
         state = InputUtil.getStringValue();
 
-        PERSON.add(new Person(fname,lname,address,city,state,phone,zip));
+        personList.add(new Person(fname,lname,address,city,state,phone,zip));
     } // END of addRecord()
 
     //	DISPLAY METHOD
     public void displayRecord()
     {
-        if (PERSON.isEmpty())
+        if (personList.isEmpty())
         {
             System.out.println("No Records!!!");
         }
         else {
-            for (Person person : PERSON) {
+            for (Person person : personList) {
                 System.out.println(person);
             }
         }
-
     } // END OF displayRecord
 
     //	EDIT METHOD
@@ -62,13 +60,13 @@ public class Helper {
     {
         int id,choice, i=0;
         String fname,lname,address,city,state,phone,zip;
-        for(Person person: PERSON)
+        for(Person person: personList)
         {
-            System.out.println("ID: #"+PERSON.indexOf(person)+" : "+person);
+            System.out.println("ID: #"+ personList.indexOf(person)+" : "+person);
         }
         System.out.print("\nEnter #ID to Edit Contact : ");
         id = InputUtil.getIntValue();
-        System.out.println(PERSON.get(id));
+        System.out.println(personList.get(id));
         while(i==0) {
             System.out.println("""
                     What You Want to edit...
@@ -84,32 +82,32 @@ public class Helper {
                 case 1 -> {
                     System.out.print("Enter new Address : ");
                     address = InputUtil.getStringValue();
-                    PERSON.get(id).setAddress(address);
+                    personList.get(id).setAddress(address);
                 }
                 case 2 -> {
                     System.out.print("Enter new City : ");
                     city = InputUtil.getStringValue();
-                    PERSON.get(id).setCity(city);
+                    personList.get(id).setCity(city);
                 }
                 case 3 -> {
                     System.out.print("Enter new State : ");
                     state = InputUtil.getStringValue();
-                    PERSON.get(id).setState(state);
+                    personList.get(id).setState(state);
                 }
                 case 4 -> {
                     System.out.print("Enter new Phone : ");
                     phone = InputUtil.getStringValue();
-                    PERSON.get(id).setPhone(phone);
+                    personList.get(id).setPhone(phone);
                 }
                 case 5 -> {
                     System.out.print("Enter new Zip Code : ");
                     zip = InputUtil.getStringValue();
-                    PERSON.get(id).setZip(zip);
+                    personList.get(id).setZip(zip);
                 }
                 case 6 -> i = 1;
                 default -> System.out.println("Please Enter Valid Option");
             }
-            System.out.println(PERSON.get(id));
+            System.out.println(personList.get(id));
         }
     } //end of edit() method
 
@@ -117,13 +115,13 @@ public class Helper {
     public void deleteRecord()
     {
         int id;
-        for(Person p: PERSON)
+        for(Person p: personList)
         {
-            System.out.println("ID: #"+PERSON.indexOf(p)+" : "+p);
+            System.out.println("ID: #"+ personList.indexOf(p)+" : "+p);
         }
         System.out.print("\nEnter #ID to delete Contact : ");
         id = InputUtil.getIntValue();
-        PERSON.remove(id);
+        personList.remove(id);
     } //end of delete() method
 
     //    This Method will Sort the Address book by Name, city, state and Zip
@@ -138,16 +136,16 @@ public class Helper {
         int choice = InputUtil.getIntValue();
         switch (choice) {
             case 1:
-                Sort.sortByName(PERSON);
+                Sort.sortByName(personList);
                 break;
             case 2:
-                Sort.sortByCity(PERSON);
+                Sort.sortByCity(personList);
                 break;
             case 3:
-                Sort.sortByState(PERSON);
+                Sort.sortByState(personList);
                 break;
             case 4:
-                Sort.sortByZip(PERSON);
+                Sort.sortByZip(personList);
                 break;
             case 5:
                 return;
@@ -165,10 +163,16 @@ public class Helper {
                 1: City
                 2: State""");
         choice=InputUtil.getIntValue();
-        switch (choice) {
-            case 1 -> Search.searchByCity(PERSON);
-            case 2 -> Search.searchByState(PERSON);
-            default -> System.out.println("Enter Valid Option");
+        switch (choice)
+        {
+            case 1 :
+                Search.searchByCity(personList);
+                break;
+            case 2 :
+                Search.searchByState(personList);
+                break;
+            default:
+                System.out.println("Enter Valid Option");
         }
     }
 
@@ -177,38 +181,19 @@ public class Helper {
     {
         Dictionary<String ,String> cityDict = createCityDict();
         Dictionary<String ,String> stateDict = createStateDict();
+        final String city,state;
+        System.out.println("Enter City");
+        city=InputUtil.getStringValue();
+        System.out.println("Enter State");
+        state=InputUtil.getStringValue();
         Search.searchByCityAndState(cityDict,stateDict);
     } //End of viewByCityAndState() Method
-
-    public void countByOption() {
-        System.out.println("1. Count City ");
-        System.out.println("2. Count State");
-        System.out.println("3. Back ");
-        System.out.println("Enter Your Choice : ");
-        int choice = InputUtil.getIntValue();
-        switch (choice) {
-            case 1:
-                Map<String, Long> countCity = PERSON.stream()
-                        .collect(Collectors.groupingBy(Person::getCity, Collectors.counting()));
-                System.out.println(countCity + "\n");
-                break;
-            case 2:
-                Map<String, Long> countState = PERSON.stream()
-                        .collect(Collectors.groupingBy(Person::getState, Collectors.counting()));
-                System.out.println(countState + "\n");
-                break;
-            case 3:
-                return;
-            default:
-                System.out.println("Invalid Option");
-        }
-    }
 
     //    Create City Dictionary
     public Dictionary<String,String> createCityDict()
     {
         Dictionary<String,String> cityDict = new Hashtable<>();
-        for (Person person:PERSON)
+        for (Person person: personList)
         {
             cityDict.put(person.getFname(),person.getCity());
         }
@@ -219,18 +204,38 @@ public class Helper {
     public Dictionary<String,String> createStateDict()
     {
         Dictionary<String,String> stateDict = new Hashtable<>();
-        for (Person person:PERSON)
+        for (Person person: personList)
         {
             stateDict.put(person.getFname(),person.getState());
         }
         return stateDict;
     }
 
+    public void countByOption() {
+        System.out.println("1. Count City ");
+        System.out.println("2. Count State");
+        System.out.println("Enter Your Choice : ");
+        int choice = InputUtil.getIntValue();
+        switch (choice) {
+            case 1 -> {
+                Map<String, Long> countCity = personList.stream()
+                        .collect(Collectors.groupingBy(Person::getCity, Collectors.counting()));
+                System.out.println(countCity + "\n");
+            }
+            case 2 -> {
+                Map<String, Long> countState = personList.stream()
+                        .collect(Collectors.groupingBy(Person::getState, Collectors.counting()));
+                System.out.println(countState + "\n");
+            }
+            default -> System.out.println("Invalid Option");
+        }
+    }
+
     //    this function will check for duplicate users
     public boolean checkExists(String fname)
     {
         int flag=0;
-        for (Person p: PERSON)
+        for (Person p: personList)
         {
             if (p.getFname().equals(fname))
             {
