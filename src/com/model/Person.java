@@ -1,15 +1,19 @@
 package com.model;
 
-import java.util.Comparator;
-
 public class Person
 {
-    private String fname, lname, address, city, state, phone,zip;
+    private final String firstName;
+    private final String lastName;
+    private String address;
+    private String city;
+    private String state;
+    private String phone;
+    private String zip;
 
-    public Person(String fname, String lname, String address, String city, String state, String phone, String zip)
-    {
-        this.fname = fname;
-        this.lname = lname;
+    /*Constructor to initialize fields*/
+    public Person(String firstName, String lastName, String address, String city, String state, String zip, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
         this.city = city;
         this.state = state;
@@ -17,119 +21,62 @@ public class Person
         this.zip = zip;
     }
 
-    public Person() {
-
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFname()
-    {
-        return fname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setFname(String fname)
-    {
-        this.fname = fname;
-    }
-
-    public String getLname()
-    {
-        return lname;
-    }
-
-    public void setLname(String lname)
-    {
-        this.lname = lname;
-    }
-
-    public String getAddress()
-    {
-        return address;
-    }
-
-    public void setAddress(String address)
-    {
-        this.address = address;
-    }
-
-    public String getCity()
-    {
-        return city;
-    }
-
-    public void setCity(String city)
-    {
-        this.city = city;
-    }
-
-    public String getState()
-    {
-        return state;
-    }
-
-    public void setState(String state)
-    {
-        this.state = state;
-    }
-
-    public String getPhone()
-    {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone)
-    {
+    /*Getter & Setter Methods*/
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getZip()
-    {
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(String zip)
-    {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
-    // Sort By First Name
-    public static Comparator<Person> firstNameSorting = (p1, p2) -> {
-        String fname1 = p1.getFname();
-        String fname2 = p2.getFname();
-        // ascending order
-        return fname1.compareToIgnoreCase(fname2);
-    };
-    // Sort By City
-    public static Comparator<Person> citySorting = (p1, p2) -> {
-        String city1 = p1.getCity();
-        String city2 = p2.getCity();
-        // ascending order
-        return city1.compareToIgnoreCase(city2);
-    };
-    // Sort By State
-    public static Comparator<Person> stateSorting = (p1, p2) -> {
-        String state1 = p1.getState();
-        String state2 = p2.getState();
-        // ascending order
-        return state1.compareToIgnoreCase(state2);
-    };
-    // Sort By Zip
-    public static Comparator<Person> zipSorting = (p1, p2) -> {
-        String zip1 = p1.getZip();
-        String zip2 = p2.getZip();
-        // ascending order
-        return zip1.compareToIgnoreCase(zip2);
-    };
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @Override
     public String toString() {
-        return "Person{" +
-                "fname='" + fname + '\'' +
-                ", lname='" + lname + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", phone='" + phone + '\'' +
-                ", zip='" + zip + '\'' +
-                '}';
+        return "\nFull Name : " + firstName + " " + lastName +
+                "\nAddress : " + address +
+                "\nCity : " + city +
+                "\nState : " + state +
+                "\nPhone : " + phone +
+                "\nZip : " + zip + "\n";
     }
 }
